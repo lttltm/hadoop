@@ -11,11 +11,10 @@ public class JidesTest {
 	@Test
 	public void testJedis() {
 		Jedis jedis = new Jedis("hadoop3");
-		Set<String> keys = jedis.keys("*");
 		
-		System.out.println(keys);
-		
-		jedis.close();
+		jedis.zadd("bbbbbbbbbbbb", 10, "b");
 
 	}
+	
+	
 }

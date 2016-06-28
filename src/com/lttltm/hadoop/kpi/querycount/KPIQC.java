@@ -28,12 +28,16 @@ public class KPIQC {
 		protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 				throws IOException, InterruptedException {
 			
-			KPI kip = KPI.filterPVs(value.toString());
+			KPI kpi = KPI.filterPVs(value.toString());
 			
-			if(kip.getRequest_url().contains("query?query=")){
-				String[] strs = kip.getRequest_url().split("query=");
-				word.set(strs[1]);
-				context.write(word, one);
+			if(kpi.isValid() && kpi.getRequest_url().contains("query?query=")){
+				String[] strs = kpi.getRequest_url().split("query=");
+				if(strs.length == 2)
+				{
+					word.set(strs[1]);
+					context.write(word, one);
+				}
+				
 			}
 		}
 		
@@ -66,7 +70,7 @@ public class KPIQC {
 		
 		Job job = Job.getInstance(conf, "KPIPV");
 		
-		job.setJarByClass(QQSecondRelationship.class);
+		job.setJarByClass(KPIQC.class);
 		String osName = System.getProperty("os.name");
 	    if (osName.startsWith("Windows")) {
 	    	job.setJar("C:/Users/Administrator/Desktop/hadoop.jar");
