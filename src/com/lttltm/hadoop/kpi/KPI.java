@@ -10,17 +10,17 @@ import java.util.Set;
 
 public class KPI {
 
-	private String remote_addr;// ¼ÇÂ¼¿Í»§¶ËµÄipµØÖ·
-	private String remote_user;// ¼ÇÂ¼¿Í»§¶ËÓÃ»§Ãû³Æ,ºöÂÔÊôĞÔ"-"
-	private String time_local;// ¼ÇÂ¼·ÃÎÊÊ±¼äÓëÊ±Çø
+	private String remote_addr;// è®°å½•å®¢æˆ·ç«¯çš„ipåœ°å€
+	private String remote_user;// è®°å½•å®¢æˆ·ç«¯ç”¨æˆ·åç§°,å¿½ç•¥å±æ€§"-"
+	private String time_local;// è®°å½•è®¿é—®æ—¶é—´ä¸æ—¶åŒº
 	private String request_method;
-	private String request_url;// ¼ÇÂ¼ÇëÇóµÄurlÓëhttpĞ­Òé
-	private String status;// ¼ÇÂ¼ÇëÇó×´Ì¬£»³É¹¦ÊÇ200
-	private String body_bytes_sent;// ¼ÇÂ¼·¢ËÍ¸ø¿Í»§¶ËÎÄ¼şÖ÷ÌåÄÚÈİ´óĞ¡
-	private String http_referer;// ÓÃÀ´¼ÇÂ¼´ÓÄÇ¸öÒ³ÃæÁ´½Ó·ÃÎÊ¹ıÀ´µÄ
-	private String http_user_agent;// ¼ÇÂ¼¿Í»§ä¯ÀÀÆ÷µÄÏà¹ØĞÅÏ¢
+	private String request_url;// è®°å½•è¯·æ±‚çš„urlä¸httpåè®®
+	private String status;// è®°å½•è¯·æ±‚çŠ¶æ€ï¼›æˆåŠŸæ˜¯200
+	private String body_bytes_sent;// è®°å½•å‘é€ç»™å®¢æˆ·ç«¯æ–‡ä»¶ä¸»ä½“å†…å®¹å¤§å°
+	private String http_referer;// ç”¨æ¥è®°å½•ä»é‚£ä¸ªé¡µé¢é“¾æ¥è®¿é—®è¿‡æ¥çš„
+	private String http_user_agent;// è®°å½•å®¢æˆ·æµè§ˆå™¨çš„ç›¸å…³ä¿¡æ¯
 
-	private boolean valid = true;// ÅĞ¶ÏÊı¾İÊÇ·ñºÏ·¨
+	private boolean valid = true;// åˆ¤æ–­æ•°æ®æ˜¯å¦åˆæ³•
 
 	public void setRemote_addr(String remote_addr) {
 		this.remote_addr = remote_addr;
@@ -125,7 +125,7 @@ public class KPI {
         System.out.println(line);
         KPI kpi = new KPI();
         String[] arr = line.split(" ");
-        if (arr.length > 11) {
+        if (arr.length >= 10) {
             kpi.setRemote_addr(arr[0]);
             kpi.setRemote_user(arr[1]);
             kpi.setTime_local(arr[3].substring(1));
@@ -133,15 +133,9 @@ public class KPI {
             kpi.setRequest_url(arr[6]);
             kpi.setStatus(arr[8]);
             kpi.setBody_bytes_sent(arr[9]);
-            kpi.setHttp_referer(arr[10]);
             
-            if (arr.length > 12) {
-                kpi.setHttp_user_agent(arr[11] + " " + arr[12]);
-            } else {
-                kpi.setHttp_user_agent(arr[11]);
-            }
 
-            if (Integer.parseInt(kpi.getStatus()) >= 400) {// ´óÓÚ400£¬HTTP´íÎó
+            if (Integer.parseInt(kpi.getStatus()) >= 400) {// å¤§äº400ï¼ŒHTTPé”™è¯¯
                 kpi.setValid(false);
             }
         } else {
@@ -151,24 +145,24 @@ public class KPI {
     }
 	
 	 /**
-     * °´pageµÄpv·ÖÀà
+     * æŒ‰pageçš„pvåˆ†ç±»
      */
     public static KPI filterPVs(String line) {
         KPI kpi = parser(line);
         Set<String> pages = new HashSet<String>();
-        pages.add("/");
-        pages.add("/about");
-        pages.add("/black-ip-list/");
-        pages.add("/cassandra-clustor/");
-        pages.add("/finance-rhive-repurchase/");
-        pages.add("/hadoop-family-roadmap/");
-        pages.add("/hadoop-hive-intro/");
-        pages.add("/hadoop-zookeeper-intro/");
-        pages.add("/hadoop-mahout-roadmap/");
-
-        if (!pages.contains(kpi.getRequest_url())) {
-            kpi.setValid(false);
-        }
+//        pages.add("/");
+//        pages.add("/about");
+//        pages.add("/black-ip-list/");
+//        pages.add("/cassandra-clustor/");
+//        pages.add("/finance-rhive-repurchase/");
+//        pages.add("/hadoop-family-roadmap/");
+//        pages.add("/hadoop-hive-intro/");
+//        pages.add("/hadoop-zookeeper-intro/");
+//        pages.add("/hadoop-mahout-roadmap/");
+//
+//        if (!pages.contains(kpi.getRequest_url())) {
+//            kpi.setValid(false);
+//        }
         return kpi;
     }
 

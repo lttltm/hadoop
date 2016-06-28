@@ -32,8 +32,8 @@ public class JedisRecordWriter extends RecordWriter<Text, IntWritable> {
 		int score = value.get();
 		
 		for(int i=0 ,size = keyStr.length();i<size; i++){
-			System.out.println("zadd " + keyStr +" " + score + " " + keyStr.substring(0, i+1) );
-			jedis.zadd(keyStr, score, keyStr.substring(0, i+1));
+			System.out.println("zadd " + keyStr.substring(0, i+1) +" " + score + " " +  keyStr);
+			jedis.zadd(keyStr.substring(0, i+1), score, keyStr);
 		}
 
 	}

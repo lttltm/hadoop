@@ -3,7 +3,6 @@ package com.lttltm.hadoop.kpi.querycount;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -11,13 +10,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.Reducer.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import com.lttltm.hadoop.kpi.KPI;
-import com.lttltm.hadoop.kpi.pv.KPIPV.KPIPVMapper;
-import com.lttltm.hadoop.kpi.pv.KPIPV.KPIPVReducer;
 import com.lttltm.hadoop.kpi.querycount.fm.JedisOutputFormat;
 import com.lttltm.hadoop.qq.QQSecondRelationship;
 
@@ -35,13 +30,11 @@ public class KPIQC {
 			
 			KPI kip = KPI.filterPVs(value.toString());
 			
-//			if(kip.getRequest_url().contains("query=")){
-//				String[] strs = kip.getRequest_url().split("query=");
-//				word.set(strs[1]);
-//				context.write(word, one);
-//			}
-			word.set(kip.getRequest_url());
-			context.write(word, one);
+			if(kip.getRequest_url().contains("query?query=")){
+				String[] strs = kip.getRequest_url().split("query=");
+				word.set(strs[1]);
+				context.write(word, one);
+			}
 		}
 		
 		
