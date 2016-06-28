@@ -1,4 +1,4 @@
-package com.study.hadoop.qq;
+package com.lttltm.hadoop.qq;
 
 import java.io.IOException;
 import java.util.ArrayList;

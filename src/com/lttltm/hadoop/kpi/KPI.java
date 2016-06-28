@@ -1,4 +1,4 @@
-package com.study.hadoop.kpi;
+package com.lttltm.hadoop.kpi;
 
 import java.util.HashSet;
 import java.util.Set;

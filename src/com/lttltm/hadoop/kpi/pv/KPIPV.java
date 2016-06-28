@@ -1,7 +1,6 @@
-package com.study.hadoop.kpi.pv;
+package com.lttltm.hadoop.kpi.pv;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -15,10 +14,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import com.study.hadoop.kpi.KPI;
-import com.study.hadoop.qq.QQSecondRelationship;
-import com.study.hadoop.qq.QQSecondRelationship.QQSecondRelationshipMapper;
-import com.study.hadoop.qq.QQSecondRelationship.QQSecondRelationshipReducer;
+import com.lttltm.hadoop.kpi.KPI;
+import com.lttltm.hadoop.qq.QQSecondRelationship;
 
 public class KPIPV {
 

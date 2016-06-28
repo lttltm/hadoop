@@ -1,4 +1,4 @@
-package com.study.hadoop.wc;
+package com.lttltm.hadoop.wc;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
